@@ -22,11 +22,11 @@ $ git
 $ git clone git@github.com:michaelliao/learngit.git     克隆仓库 
 
 $ ssh-keygen -t rsa -C "youremail@example.com"    创建SSH key   连接远程版本库
-  1、pwd  查看路径
+  1、pwd  查看路径,找到id_rsa.pub文件（公钥），用记事本打开。
   2、登陆GitHub，打开“Account settings”，“Add SSH Key”，填上任意Title，粘贴id_rsa.pub文件的内容：
  
  创建远程版本库
-  1、登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：learngit
+  1、登陆GitHub，在右上角找到“Create a new repo”按钮，创建仓库：learngit
   2、$ git remote add origin git@github.com:liaohuaqing/learngit.git       关联一个远程库
   3、$ git push -u origin master                                           推送master分支的所有内容
   4、$ git pull  origin master                                             同步到本地
