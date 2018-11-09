@@ -26,10 +26,11 @@ $ ssh-keygen -t rsa -C "youremail@example.com"    创建SSH key   连接远程版本库
   2、登陆GitHub，打开“Account settings”，“Add SSH Key”，填上任意Title，粘贴id_rsa.pub文件的内容：
  
  创建远程版本库
-  1、登陆GitHub，在右上角找到“Create a new repo”按钮，创建仓库：learngit
-  2、$ git remote add origin git@github.com:liaohuaqing/learngit.git       关联一个远程库
-  3、$ git push -u origin master                                           推送master分支的所有内容
-  4、$ git pull  origin master                                             同步到本地
+  1、登陆GitHub，找到“Create a new repo”按钮，创建仓库：learngit
+  2、本地文件夹git init创建仓库。
+  3、$ git remote add origin git@github.com:liaohuaqing/learngit.git       关联一个远程库
+  4、$ git push -u origin master                                           推送master分支的所有内容
+  5、$ git pull  origin master                                             同步到本地
 
 命令git rm用于删除一个文件。
 如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。
