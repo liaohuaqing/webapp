@@ -1,0 +1,35 @@
+$ git config --global user.name "Your Name"        配置Git仓库
+$ git config --global user.email "email@example.com"
+注意git config命令的--global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
+
+$ pwd     查看当前路径
+
+到代码文件夹下git bash
+
+$ git init
+$ git add ***.txt           可以多次add ;可以一次add多个，用空格隔开
+$ git diff HEAD -- ***.txt  查看不同
+$ git commit -m "***"       提交信息
+$ git log                   显示从最近到最远的提交日志
+$ git log --pretty=online   单行显示从最近到最远的提交日志
+$ git reflog                查看每一次命令
+$ git reset --hard 1094a    回退到版本1094a
+$ git status                查看状态
+$ git checkout -- ***.txt   丢弃工作区的修改  
+$ git 
+$ git 
+$ git 
+$ git clone git@github.com:michaelliao/learngit.git     克隆仓库 
+
+$ ssh-keygen -t rsa -C "youremail@example.com"    创建SSH key   连接远程版本库
+  1、pwd  查看路径,找到id_rsa.pub文件（公钥），用记事本打开。
+  2、登陆GitHub，打开“Account settings”，“Add SSH Key”，填上任意Title，粘贴id_rsa.pub文件的内容：
+ 
+ 创建远程版本库
+  1、登陆GitHub，在右上角找到“Create a new repo”按钮，创建仓库：learngit
+  2、$ git remote add origin git@github.com:liaohuaqing/learngit.git       关联一个远程库
+  3、$ git push -u origin master                                           推送master分支的所有内容
+  4、$ git pull  origin master                                             同步到本地
+
+命令git rm用于删除一个文件。
+如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。
