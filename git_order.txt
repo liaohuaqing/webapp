@@ -1,4 +1,6 @@
-$ git config --global user.name "Your Name"        配置Git仓库
+下载安装Github:
+https://git-scm.com/downloads
+$ git config --global user.name  "Your Name"        配置Git仓库
 $ git config --global user.email "email@example.com"
 注意git config命令的--global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
 
@@ -19,7 +21,7 @@ $ git checkout -- ***.txt   丢弃工作区的修改
 $ git 
 $ git 
 $ git 
-$ git clone git@github.com:michaelliao/learngit.git     克隆仓库 
+$ git clone git@github.com:liaohuaqing/learngit.git     克隆仓库 
 
 $ ssh-keygen -t rsa -C "youremail@example.com"    创建SSH key   连接远程版本库
   1、pwd  查看路径,找到id_rsa.pub文件（公钥），用记事本打开。
