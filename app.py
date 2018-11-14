@@ -1,21 +1,13 @@
-import logging; logging.basicConfig(level=logging.INFO)
+from flask import Flask
+from tree_mold  import tree_mold
+from tree import tree
+app = Flask(__name__)
 
-import asyncio, os, json, time
-from datetime import datetime
 
-from aiohttp import web
+app.register_blueprint(tree_mold, url_prefix="/oak")
+app.register_blueprint(tree, url_prefix="/fir")
+app.register_blueprint(tree_mold, url_prefix="/ash")
 
-def index(request):
-    return web.Response(body=b'<h1>Awesome</h1>')
 
-@asyncio.coroutine
-def init(loop):
-    app = web.Application(loop=loop)
-    app.router.add_route('GET', '/', index)
-    srv = yield from loop.create_server(app.make_handler(), '127.0.0.1', 8000)
-    logging.info('server started at http://127.0.0.1:9000...')
-    return srv
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(init(loop))
-loop.run_forever()
+if __name__ == '__main__':
+    app.run(port=8888)
