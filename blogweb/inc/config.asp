@@ -1,0 +1,20 @@
+﻿<%
+Dim ft_webname,weburl,webfolder,webclose,webclosewhy,logo,icp,ft_title,ft_keywords,ft_description,tongji_open,news_page,shuiyin,watermark,waterwidth,waterheight
+'ft_webname="个人博客"
+weburl="http://192.168.8.136"
+webfolder="/"
+webclose="False"
+webclosewhy="网站正在升级中，请稍候访问！"
+logo="../images/logo.gif"
+icp="渝ICP备12013128号-2"
+ft_title="个人Blog"
+ft_keywords="博客"
+ft_description="博客"
+tongji_open=1
+news_page=12
+shuiyin=1
+watermark="../images/watermark.png"
+watermark2="../../images/watermark.png"
+waterwidth=159
+waterheight=63
+%>

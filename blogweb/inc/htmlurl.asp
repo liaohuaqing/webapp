@@ -1,0 +1,4 @@
+<%
+newsurl="chenpi"
+newsclass="list"
+%>
