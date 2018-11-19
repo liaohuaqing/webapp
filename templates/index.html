@@ -52,16 +52,17 @@
           <div class="content_text">
           
            <!--wz-->
+{% for i in name %}
            <div class="wz">
          
              
-<h3><a href="<%=webfolder%>view/news_view.asp?id=1">{{name}}</a></h3>
+<h3><a href="view/news_view.asp?id=1">{{i[1]}}</a></h3>
              
           
              <dl>
-               <dt><img src="<%=imgurl%>" width="200"  height="123" alt=""></dt>
+               <dt><img src="{{i[4]}}" width="200"  height="123" alt=""></dt>
                <dd>
-                <p class="dd_text_1">{{name|safe}}.....</p>
+                <p class="dd_text_1">{{i[1]}}.....</p>
                <p class="dd_text_2">
                <span class="left author">admin </span><span class="left sj">时间:{{site}}</span>
                <span class="left fl">分类:<a href="list.asp?id=1" title="{{site}}">{{site}}</a></span><span class="left yd"><a href="<%=webfolder%>view/news_view.asp?id=1" title="{{site}}" alt="{{site}}">阅读全文</a>
@@ -72,7 +73,7 @@
                <div class="clear"></div>
              </dl>
             </div>
-            
+{% endfor %}           
            <!--wz end-->
            
          

@@ -17,6 +17,8 @@ app = Flask(__name__)
 def index():
 	aa1=""
 	aa=""
+	img=""
+	aa2=""
 	sql1 = "SELECT * FROM config"
 	try:
         # 执行SQL语句
@@ -36,13 +38,15 @@ def index():
         # 获取所有记录列表
 		results = cursor.fetchall()
    		#aa=results
+		aa2=results
 		for r in results:
 			aa=aa+r[1]+"<br>"
-			print (r[1])
+			img=img+r[4]
+			print (img)
 	except:
 		print ("Error: unable to fetch data")
 		aa="bbbbbb"
-	return render_template("index.html",site=aa1,name=aa)
+	return render_template("index.html",site=aa1,name=aa2)
 
 app.register_blueprint(aaa, url_prefix="/")
 #app.register_blueprint(tree, url_prefix="/")
