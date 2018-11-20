@@ -4,6 +4,9 @@ from flask import Flask,redirect,url_for
 from about import aaa
 from flask import render_template
 import pymysql
+
+app = Flask(__name__)
+app.register_blueprint(aaa, url_prefix="/")
  
 # 打开数据库连接
 db = pymysql.connect("localhost","root","liao1977","liao" )
@@ -11,7 +14,7 @@ db = pymysql.connect("localhost","root","liao1977","liao" )
 cursor = db.cursor()
 # SQL 查询语句
 
-app = Flask(__name__)
+
 
 @app.route("/")
 def index():
@@ -48,10 +51,9 @@ def index():
 		aa="bbbbbb"
 	return render_template("index.html",site=aa1,name=aa2)
 
-app.register_blueprint(aaa, url_prefix="/")
 #app.register_blueprint(tree, url_prefix="/")
 #app.register_blueprint(tree_mold, url_prefix="/ash")
 
 
 if __name__ == '__main__':
-    app.run(port=8888)
+    app.run(port=8001)
