@@ -1,8 +1,10 @@
 
 from flask import Blueprint
-from flask import render_template,redirect,url_for
+from flask import render_template,redirect,request,make_response,url_for
 import pymysql
-
+import datetime
+import os
+import random
 aaa= Blueprint("aaa", __name__)
 
 # 打开数据库连接
@@ -14,9 +16,7 @@ cursor = db.cursor()
 def about():
 	return render_template("about.html") 
 
-@aaa.route("/add")
-def add():
-	return render_template("add.html")
+
 	
 @aaa.route("/view/<int:post_id>")
 
@@ -48,3 +48,4 @@ def view(post_id):
 	except:
   		print ("Error: unable to fetch data")
 	return render_template("view.html",vd=results1,site=aa)
+
