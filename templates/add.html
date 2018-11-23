@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
+
     <meta charset="UTF-8">
     <title>Flask-CKEditor Demo</title>
 </head>
@@ -20,28 +20,7 @@
 	</div>
     {{ ckeditor.load() }}
 	{{ ckeditor.config(name='body') }}
-=======
-    <title>完整demo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<script type="text/javascript" src="{{url_for('static',filename='ckeditor/ckeditor.js')}}"></script>
-</head>
-<body>
-<div>
-    <h1>完整demo</h1>
-      <form>
-            <textarea name="editor1" id="editor1" class="ckeditor" rows="10" cols="80">
-                This is my textarea to be replaced with CKEditor.
-            </textarea>
-        </form>
-</div>
 
-<script type="text/javascript">
-CKEDITOR.replace('editor1', {
-    filebrowserUploadUrl: '/ckupload/',
-});
-</script>
-
->>>>>>> 0424b09887f9592f4667281de3283ae00a5a46de
 </body>
 </html>
 
