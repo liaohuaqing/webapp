@@ -44,8 +44,24 @@ def view(post_id):
    		
    		for r1 in results1:
    			aa1=r1[1]
-   		#print (aa1) 
+   		print (aa1) 
 	except:
   		print ("Error: unable to fetch data")
 	return render_template("view.html",vd=results1,site=aa)
-
+@aaa.route("/delid/<int:post_id>")
+def delid(post_id):
+  aa1=""
+  aa=""
+  img=""
+  aa2=""
+  
+  sql1 = "del * FROM liaotb where id=" + str(post_id)
+  try:
+        # 执行SQL语句
+      cursor.execute(sql1)
+        # 获取所有记录列表
+     
+      print ("删除成功！") 
+  except:
+      print ("Error:删除失败")
+  return redirect("/")
