@@ -1,16 +1,22 @@
-﻿<!DOCTYPE HTML>
+﻿
+<!DOCTYPE HTML>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 
+
 <title>{{site}}</title>
-<meta name="keywords" content="个人博客" />
+<meta name="keywords" content="{{site}}" />
 <meta name="description" content="" />
 <link rel="stylesheet" href={{url_for('static', filename='css/index.css')}}>
 
 <link rel="stylesheet" href={{url_for('static', filename='css/style.css')}}/>
 
-
+<script type="text/javascript" src={{url_for('static', filename='js/jquery1.42.min.js')}}></script>
+<script type="text/javascript" src={{url_for('static', filename='js/jquery.SuperSlide.2.1.1.js')}}></script>
+<!--[if lt IE 9]>
+<script src="../blogweb/js/html5.js"></script>
+<![endif]-->
 </head>
 
 <body>
@@ -23,11 +29,11 @@
     </div>
      <!--header end-->
     <!--nav-->
-    <div id="nav">
+     <div id="nav">
         <ul>
          <li><a href="/">首页</a></li>
-         <li><a href="../about">关于我</a></li>
-         <li><a href="../add">add</a></li>
+         <li><a href="about">关于我</a></li>
+         <li><a href="add">add</a></li>
          <li><a href="riji">个人日记</a></li>
          <li><a href="list/2">技术分享</a></li>
          <li><a href="list/1">学无止境</a></li>
@@ -38,38 +44,51 @@
        <!--nav end-->
     <!--content start-->
     <div id="content">
-       <!--left-->
-         <div class="left" id="news">
-           <div class="weizi">
-           <div class="wz_text">当前位置：<a href="/">首页</a>><a href="#">学无止境</a>><span>文章内容</span></div>
+         <!--left-->
+         <div class="left" id="c_left">
+           <div class="s_tuijian">
+           <h2>文章<span>推荐</span></h2>
            </div>
-		   
-           <div class="news_content">
-		   {%for i in vd%}
-                  <div class="news_top">
-                    <h1>{{i[1]}}</h1>
-                    <p>
-                      <span class="left sj">时间:{{i[3]}}</span><span class="left fl">分类:学无止境</span>
-                      <span class="left author">段亮</span>
-                    </p>
-                    <div class="clear"></div>
-                  </div>
-                    <div class="news_text">
-                 {{i[2]|safe}}
-                    </div>
-			
-			{% endfor %} 
-           </div>
+          <div class="content_text">
+          
+           <!--wz-->
+{% for i in name %}
+           <div class="wz">
+         
+             
+<h3><a href="view/{{i[0]}}">{{i[1]}}</a></h3>
+             
+          
+             <dl>
+               <dt><a href="view/{{i[0]}}"><img src="static/{{i[4]}}" width="200"  height="123" alt=""></a></dt>
+               <dd>
+                <p class="dd_text_1"><a href="view/{{i[0]}}"><font color=black>{{i[2][0:120]|striptags }}.....</font></a></p>
+               <p class="dd_text_2">
+               <span class="left author">admin </span><span class="left sj">时间:{{i[3]}}</span>
+               <span class="left fl">分类:<a href="list.asp?id=1" title="{{site}}">{{site}}</a></span><span class="left yd"><a href="delid/{{i[0]}}" title="{{i[1]}}" alt="{{i[1]}}">阅读全文</a>
+               </span>
+                <div class="clear"></div>
+               </p>
+               </dd>
+               <div class="clear"></div>
+             </dl>
+            </div>
+{% endfor %}           
+           <!--wz end-->
            
+         
+          
+                             
+           </div>
          </div>
-         <!--end left -->
+         <!--left end-->
          <!--right-->
-          <div class="right" id="c_right">
+         <div class="right" id="c_right">
           <div class="s_about">
           <h2>关于博主</h2>
            <img src={{url_for('static', filename='images/my.jpg')}} width="230" height="230" alt="博主"/>
-           <p>博主：XX</p>
-           <p>职业：web前端、视觉设计</p>
+           <p>博主：再向虎山行</p>
+           <p>职业：web前端、后台设计</p>
            <p>简介：</p>
            <p>
            <a href="#" title="联系博主"><span class="left b_1"></span></a><a href="#" title="加入QQ群，一起学习！"><span class="left b_2"></span></a>
@@ -108,20 +127,24 @@
               </div>
            </div>
            <!--end-->
+           <div class="link">
+            <h2>友情链接</h2>
+            <p><a href="http://www.sina.com">个人博客</a></p>
+           </div>
          </div>
-         <!--end  right-->
+         <!--right end-->
          <div class="clear"></div>
-         
     </div>
-
     <!--content end-->
-    <!--footer-->
+    <!--footer start-->
     <div id="footer">
-     <p>Design by:<a href="/" target="_blank">再向虎山行</a> 2018-11-23</p>
+     <p>Design by:<a href="#" target="_blank">再向虎山行</a> 2017-2-28</p>
+     <p><a href="http://www.miitbeian.gov.cn/" target="_blank"><%response.write ft_icpname%></a></p>
+     <br>
     </div>
     <!--footer end-->
    
+    
+
 </body>
 </html>
-
-

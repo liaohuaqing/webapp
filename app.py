@@ -59,9 +59,10 @@ def index():
 	try:
         # 执行SQL语句
 		cursor.execute(sql)
+		db.commit()
         # 获取所有记录列表
 		results = cursor.fetchall()
-   		#aa=results
+   		
 		aa2=results
 		for r in results:
 			aa=aa+r[1]+"<br>"
@@ -77,10 +78,10 @@ def gen_rnd_filename():
     return '%s%s' % (filename_prefix, str(random.randrange(1000, 10000)))#app.register_blueprint(tree, url_prefix="/")
 #app.register_blueprint(tree_mold, url_prefix="/ash")
 
-def upcontent(title,body):
+def upcontent(title,img,body):
 	
 	#print(body)
-	sql_insert ="insert into liaotb(name,content,date1,img,author) values('%s','%s','%s','%s','%s')" % (title,body,title,title,title)
+	sql_insert ="insert into liaotb(name,content,date1,img,author) values('%s','%s','%s','%s','%s')" % (title,body,title,img,title)
  
 	try:
 		cursor.execute(sql_insert)
@@ -99,14 +100,16 @@ def add():
     form = PostForm()
     if form.validate_on_submit():
         title = form.title.data
+        img= form.img.data
         body = form.body.data
         # You may need to store the data in database here
-        upcontent(title,body)
-        return render_template('post.html', title=title, body=body)
+        upcontent(title,img,body)
+        return render_template('post.html', title=title, img=img, body=body)
         
     return render_template('add.html', form=form)
 class PostForm(FlaskForm):
     title = StringField('Title')
+    img = StringField('Image')
     body = CKEditorField('Body', validators=[DataRequired()])
     submit = SubmitField()
 

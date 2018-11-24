@@ -29,8 +29,10 @@ def view(post_id):
 	try:
         # 执行SQL语句
    		cursor.execute(sql1)
+   		db.commit()
         # 获取所有记录列表
    		results = cursor.fetchall()
+
    		for r in results:
    			aa=r[1]
 	except:
@@ -54,14 +56,17 @@ def delid(post_id):
   aa=""
   img=""
   aa2=""
-  
-  sql1 = "del * FROM liaotb where id=" + str(post_id)
+  cur = db.cursor()
+  #sql1 = "delete from liaotb where id=1"
+  sql1 = "delete from liaotb where id=%d" %(post_id)
   try:
+      print(sql1)
         # 执行SQL语句
-      cursor.execute(sql1)
+      cur.execute(sql1)
         # 获取所有记录列表
-     
+      db.commit()
       print ("删除成功！") 
   except:
       print ("Error:删除失败")
+      db.rollback()
   return redirect("/")

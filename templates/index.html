@@ -12,11 +12,7 @@
 
 <link rel="stylesheet" href={{url_for('static', filename='css/style.css')}}/>
 
-<script type="text/javascript" src={{url_for('static', filename='js/jquery1.42.min.js')}}></script>
-<script type="text/javascript" src={{url_for('static', filename='js/jquery.SuperSlide.2.1.1.js')}}></script>
-<!--[if lt IE 9]>
-<script src="../blogweb/js/html5.js"></script>
-<![endif]-->
+
 </head>
 
 <body>
@@ -65,7 +61,7 @@
                 <p class="dd_text_1"><a href="view/{{i[0]}}"><font color=black>{{i[2][0:120]|striptags }}.....</font></a></p>
                <p class="dd_text_2">
                <span class="left author">admin </span><span class="left sj">时间:{{i[3]}}</span>
-               <span class="left fl">分类:<a href="list.asp?id=1" title="{{site}}">{{site}}</a></span><span class="left yd"><a href="view/{{i[0]}}" title="{{i[1]}}" alt="{{i[1]}}">阅读全文</a>
+               <span class="left fl">分类:<a href="list.asp?id=1" title="{{site}}">{{site}}</a></span><span class="left yd"><a href="delid/{{i[0]}}" title="{{i[1]}}" alt="{{i[1]}}">阅读全文</a>
                </span>
                 <div class="clear"></div>
                </p>

@@ -23,8 +23,8 @@ border-bottom:1px solid #ccc;}
 #say .weizi{width:920px;height:28px;line-height:28px; background:url("../images/weizi.png") 7px 5px no-repeat; background-color:#fff;border-radius:3px;}
 .weizi .wz_text{font-size:16px;color:#444;padding-left:25px;}
 .weizi .wz_text h1{font-size:16px;color:#F00E71;display:inline;font-weight:500;}
-.weizi .wz_text a{color:#444;}
-.weizi .wz_text a:hover{text-decoration:underline;color:#f00;}
+/*.weizi .wz_text a{color:#444;}
+.weizi .wz_text a:hover{text-decoration:underline;color:#f00;}*/
 .say_box {background:#f8f8f8;box-shadow: 0px 1px 0px rgba(255,255,255,.1), inset 0px 1px 1px rgba(214, 214, 214, 0.7);width:740px; border-radius:5px;position:relative; padding: 20px 0;
 margin:10px 0;font-size:14px;font-family:"宋体"; }
 .say_box p {line-height:24px;padding:0 20px 20px ;}

@@ -69,10 +69,10 @@ text-align:center;padddding:2px 5px;border:1px solid #AC9696;border-radius:2px;}
 .lanmubox .bd ul li a:hover{color:#f00;}
 /*link*/
 #c_right .link{width:260px;height:180px;border:1px solid #ccc;margin-top:5px;background:#fff;}
-.link h2{font-size:16px;color:#444;padding:5px 0px 2px 5px;border-bottom:1px solid red;}
-.link p{padding:10px 0px 0px 15px;}
-.link p a{color:#444;}
-.link p a:hover{color:#f00;}
+/*.link h2{font-size:16px;color:#444;padding:5px 0px 2px 5px;border-bottom:1px solid red;}
+#.link p{padding:10px 0px 0px 15px;}
+#.link p a{color:#444;}
+#.link p a:hover{color:#f00;}*/
 /*right end*/
 /*content end*/
 #footer{width:1000px;height:50px;margin:10px auto;border-top:1px solid #ccc;}
