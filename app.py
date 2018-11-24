@@ -5,7 +5,7 @@ from about import aaa
 import pymysql
 import os
 import re
-import json
+import requests
 import random
 import urllib
 import datetime
@@ -13,7 +13,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_ckeditor import CKEditor, CKEditorField, upload_fail, upload_success
-
+from datetime import timedelta
 app = Flask(__name__)
 ckeditor = CKEditor(app)
 
@@ -23,7 +23,7 @@ app.config['CKEDITOR_HEIGHT'] = 400
 app.config['CKEDITOR_FILE_UPLOADER'] = 'upload'
 # app.config['CKEDITOR_ENABLE_CSRF'] = True  # if you want to enable CSRF protect, uncomment this line
 app.config['UPLOADED_PATH'] = os.path.join(basedir, 'uploads1')
-
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7) #session保存时间
 app.secret_key = 'secret string'
 
 app.register_blueprint(aaa, url_prefix="/")
@@ -43,6 +43,7 @@ def index():
 	aa=""
 	img=""
 	aa2=""
+	request.session['username'] = 'liaohuaqing'
 	sql1 = "SELECT * FROM config"
 	try:
         # 执行SQL语句
@@ -68,6 +69,7 @@ def index():
 			aa=aa+r[1]+"<br>"
 			img=img+r[4]
 			print (img)
+			print(request.session('username'))
 	except:
 		print ("Error: unable to fetch data")
 		aa="bbbbbb"
@@ -134,4 +136,4 @@ def upload():
 
 
 if __name__ == '__main__':
-    app.run(port=8001)
+    app.run(port=8000)

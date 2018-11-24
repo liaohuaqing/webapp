@@ -1,0 +1,54 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>网站后台登录</title>
+<meta name="author" content="www.gome5.cn" />
+<link href="{{url_for('static', filename='css/pub/global.css')}}" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="login_body">
+<div class="login_div">
+
+
+<table class="login0" width="182">
+<form action="/login" method="post" name="login" id="login" >
+<tr>
+<td colspan="2" align="center"><font size="3">网站后台登录</font></td>
+</tr>
+<tr>
+<td align="right" class="left" width="64">用户名：</td>
+<td class="right" width="108">
+<input name="name" type="text" id="name" class="text_css" size="20" maxlength="50" />
+</td>
+</tr>
+<tr>
+<td align="right" class="left" width="64">密码：</td>
+<td class="right" width="108">
+<input name="password" type="password" id="password" class="text_css" size="20" maxlength="50" />
+</td>
+</tr>
+<tr>
+<td align="right" class="left" width="64">验证码：</td>
+<td class="right" width="108">
+<input name="code" type="text" id="name" class="text_css" size="20" maxlength="50" />
+</td>
+</tr>
+<tr>
+<td align="cnter" class="left" size="20" width="64" colspan="2">
+<p align="center">
+<img  src="/code " onclick="this.src='/code?'+ Math.random()" width="150" height="32"></td>
+</tr>
+<tr align="center" >
+<td colspan="2" class="a3">
+<input type="submit" name="Submit" value="登录" class="submit_button" style="background-image:url('../static/images/button.gif')"/>
+<input name="Reset" type="reset" id="Reset" value="重置" class="submit_button" style="background-image:url('../static/images/button.gif')"/>
+</td>
+</tr></form>
+</table>
+
+</div>
+</body>
+</html>

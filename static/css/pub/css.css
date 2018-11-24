@@ -1,0 +1,74 @@
+@charset "utf-8";
+/* CSS Document */
+html {
+overflow-y:auto!important;
+*overflow-y:scroll;
+}
+hr{
+	border-top-width: 1px;
+	border-top-style: dashed;
+	border-top-color: #86BCD4;
+	Shade:no;
+	height:0px;
+}
+a{text-decoration: none; color: #003366;}
+a:hover{ text-decoration: underline;} 
+
+body{
+	scrollbar-base-color: #F8F8F8;
+	scrollbar-arrow-color: #698CC3;
+	font-size: 12px;
+	background-color: #FFFFFF;
+	font-family: "微软雅黑";
+	margin:5px;
+}
+.submit_button{
+	width:90px;
+	height:30px;
+	background-image: url(../images/button.gif);
+	background-repeat: no-repeat;
+	color:#ffffff;
+	font-weight:bold;
+}
+table{ font-size: 12px; color: #000000;}
+
+textarea,input,select{ font-family: "微软雅黑"; font-size: 12px;  color: #000000; font-weight: normal; background-color: #EAFCD5;}
+
+
+.TableTitleLink A:link,.TableTitleLink A:visited{ text-decoration: none; color: #ffffff ;} 
+
+.a1{
+	background:#E2F4FC;
+	color:#0093ca;
+	font-weight: bold;
+	font-size: 13px;
+	line-height: 23px;
+}
+.a2{background:#ffffff;} 
+.a3{
+	background: #FFFFFF;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #CCCCCC;
+}
+.a4{background: #FFFFFF;}
+.a5{background: #FFFFCC;}
+
+.red { color:#FF0000;}
+.hui{color:#666666;}
+img {border:0px}
+
+/*分页样式*/
+
+div.page {PADDING:8px; MARGIN: 3px;  TEXT-ALIGN: center; clear:both;
+}
+div.page A { border:#01B0ED 1px solid; padding:2px 5px; margin:2px; color:#01B0ED; text-decoration:none;
+}
+div.page A:hover {color:#FFFFFF; background:#01B0ED;text-decoration:none;
+}
+div.page span.current {border:#01B0ED 1px solid;padding:2px 5px; margin:2px;color: #333333;background:#01B0ED;
+}
+div.page span.disabled {border:#FAFAFA 1px solid;padding:2px 5px; margin:2px;color: #333333;
+}
+div.page span.text {border:#F6F6F6 1px solid;padding:2px 5px; margin:2px;color:#333333;
+}

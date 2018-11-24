@@ -1,0 +1,77 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>网站后台登录</title>
+<meta name="author" content="Web Design：victor QQ:691519757 E-mail:victor2008@foxmail.com Website:http://www.andasen.com" />
+<link href="pub/global.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="login_body">
+<div class="login_div">
+
+<script language="javascript">
+function checklogin()
+{
+if(document.login.name.value=='')
+{alert('请输入用户名！');
+document.login.name.focus();
+return false
+}
+if (document.login.password.value=='')
+{alert('请输入密码！');
+document.login.password.focus();
+return false
+}
+if (document.login.code.value=='')
+{alert('请输入验证码！');
+document.login.code.focus();
+return false
+}
+}
+</script>
+<table class="login0">
+<form action="index.asp?action=check" method="post" name="login" id="login" onSubmit="return checklogin();">
+<tr>
+<td colspan="2" align="center"><font size="3">网站后台登录</font></td>
+</tr>
+<tr>
+<td align="right" class="left">用户名：</td>
+<td class="right">
+<input name="name" type="text" id="name" class="text_css" size="20" maxlength="50" />
+</td>
+</tr>
+<tr>
+<td align="right" class="left">密码：</td>
+<td class="right">
+<input name="password" type="password" id="password" class="text_css" size="20" maxlength="50" />
+</td>
+</tr>
+<tr>
+<td align="right" class="left">验证码：</td>
+<td class="right">
+<input name="code" type="text" id="code" size="4" class="text_css" maxlength="4" />
+<img src="../inc/code.asp?',Math.random()'" id="verImg" alt="点击刷新验证码" onclick="nchangeImg();" style=" cursor:pointer;">
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function nchangeImg(){
+var img = document.getElementById("verImg");
+img.src = "../inc/code.asp?" + Math.random();
+}
+//-->
+</SCRIPT>
+</td>
+</tr>
+<tr align="center" >
+<td colspan="2" class="a3">
+<input type="submit" name="Submit" value="登录" class="submit_button" style="border:none;"/>
+<input name="Reset" type="reset" id="Reset" value="重置" class="submit_button" style="border:none;"/>
+</td>
+</tr></form>
+</table>
+
+</div>
+</body>
+</html>
