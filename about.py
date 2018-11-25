@@ -1,13 +1,15 @@
 
 from flask import Blueprint
-from flask import render_template,redirect,request,make_response,url_for
+from flask import render_template,redirect,request,make_response,url_for,session
 from PIL import Image, ImageFont, ImageDraw, ImageFilter
 from io import BytesIO
 import pymysql
 import datetime
 import os
 import random
+import requests
 aaa= Blueprint("aaa", __name__)
+#session = requests.Session()
 def validate_picture():
 	total = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345789'
 	# 图片大小130 x 50
@@ -44,6 +46,7 @@ cursor = db.cursor()
 # SQL 查询语句
 @aaa.route("/about")
 def about():
+	print(session['username'])
 	return render_template("about.html") 
 
 

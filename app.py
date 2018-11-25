@@ -1,6 +1,6 @@
-from flask import Flask,render_template,request,url_for,send_from_directory,redirect,make_response
+from flask import Flask,render_template,request,url_for,send_from_directory,redirect,make_response,session
 #from tree_mold  import tree_mold
-#from tree import tree
+from flask_session import Session
 from about import aaa
 import pymysql
 import os
@@ -16,7 +16,7 @@ from flask_ckeditor import CKEditor, CKEditorField, upload_fail, upload_success
 from datetime import timedelta
 app = Flask(__name__)
 ckeditor = CKEditor(app)
-
+Session(app) 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['CKEDITOR_SERVE_LOCAL'] = True
 app.config['CKEDITOR_HEIGHT'] = 400
@@ -24,8 +24,8 @@ app.config['CKEDITOR_FILE_UPLOADER'] = 'upload'
 # app.config['CKEDITOR_ENABLE_CSRF'] = True  # if you want to enable CSRF protect, uncomment this line
 app.config['UPLOADED_PATH'] = os.path.join(basedir, 'uploads1')
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7) #session保存时间
-app.secret_key = 'secret string'
-
+#app.secret_key = 'secret string'
+app.config['SECRET_KEY'] = os.urandom(24)
 app.register_blueprint(aaa, url_prefix="/")
  
 
@@ -36,14 +36,15 @@ cursor = db.cursor()
 # SQL 查询语句
 
 
-
+#session = requests.Session()
+session['username']= 'liaohuaqing'
 @app.route("/")
 def index():
 	aa1=""
 	aa=""
 	img=""
 	aa2=""
-	request.session['username'] = 'liaohuaqing'
+	
 	sql1 = "SELECT * FROM config"
 	try:
         # 执行SQL语句
@@ -69,7 +70,7 @@ def index():
 			aa=aa+r[1]+"<br>"
 			img=img+r[4]
 			print (img)
-			print(request.session('username'))
+			print(session.get['username'])
 	except:
 		print ("Error: unable to fetch data")
 		aa="bbbbbb"
@@ -136,4 +137,4 @@ def upload():
 
 
 if __name__ == '__main__':
-    app.run(port=8000)
+    app.run(port=8001)
