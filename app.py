@@ -48,7 +48,7 @@ def index():
 	aa=""
 	img=""
 	aa2=""
-	session['username']= 'liaohuaqing'
+	
 	sql1 = "SELECT * FROM config"
 	try:
         # 执行SQL语句
@@ -68,7 +68,8 @@ def index():
 		db.commit()
         # 获取所有记录列表
 		results = cursor.fetchall()
-		ss=session.get('user')
+		session['username']= 'liaohuaqing'
+		ss=session.get('username')
 		print(ss) 
 		aa2=results
 		for r in results:

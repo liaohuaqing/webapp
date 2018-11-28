@@ -16,7 +16,7 @@ def validate_picture():
 	width = 130
 	heighth = 60
 	# 先生成一个新图片对象
-	im = Image.new('RGB',(width, heighth), 'white')
+	im = Image.new('RGB',(width, heighth), 'black')
 	# 设置字体
 	#font=ImageFont.load_default().font
 	font = ImageFont.truetype('g:\\WINDOWS\\Fonts\\msyh.ttf', 40)
@@ -24,10 +24,10 @@ def validate_picture():
 	draw = ImageDraw.Draw(im)
 	str = ''
 	# 输出每一个文字
-	for item in range(5):
+	for item in range(3):
 		text = random.choice(total)
 		str += text
-		draw.text((5+random.randint(4,7)+20*item,5+random.randint(3,7)), text=text, fill='black',font=font )
+		draw.text((5+random.randint(4,7)+20*item,5+random.randint(3,7)), text=text, fill='white',font=font )
 
 	# 划几根干扰线
 	for num in range(8):
@@ -35,7 +35,7 @@ def validate_picture():
 		y1 = random.randint(0, heighth/2)
 		x2 = random.randint(0, width)
 		y2 = random.randint(heighth/2, heighth)
-		draw.line(((x1, y1),(x2,y2)), fill='black', width=1)
+		draw.line(((x1, y1),(x2,y2)), fill='blue', width=1)
 	# 模糊下,加个帅帅的滤镜～
 	im = im.filter(ImageFilter.FIND_EDGES)
 	return im, str
@@ -62,13 +62,28 @@ def get_code():
 	response = make_response(buf_str)
 	response.headers['Content-Type'] = 'image/gif'
 	# 将验证码字符串储存在session中
-	#session['image'] = str
+	session['image'] = str
 	return response
 
 @aaa.route("/login")
 def login():
+	print(session.get('image'))
 	return render_template("login.html") 
     
+@aaa.route("/checkin", methods=['POST'])
+def checkin():
+	admin1=request.form.get('admin1')
+	pass1=request.form.get('pass1')
+	image1=request.form.get('code')
+	print(session.get('image'))
+	print("admin:",admin1)
+	if admin1==pass1:
+		print("ok!pass")
+		return render_template("about.html")
+
+	else:
+		print("bad!")
+		return render_template("login.html")
 
 	
 @aaa.route("/view/<int:post_id>")
