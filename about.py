@@ -79,7 +79,7 @@ def checkin():
 	print("admin:",admin1)
 	if admin1==pass1:
 		print("ok!pass")
-		return render_template("about.html")
+		return render_template("home.html")
 
 	else:
 		print("bad!")
