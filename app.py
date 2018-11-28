@@ -23,9 +23,9 @@ app.config['CKEDITOR_HEIGHT'] = 400
 app.config['CKEDITOR_FILE_UPLOADER'] = 'upload'
 # app.config['CKEDITOR_ENABLE_CSRF'] = True  # if you want to enable CSRF protect, uncomment this line
 app.config['UPLOADED_PATH'] = os.path.join(basedir, 'uploads1')
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7) #session保存时间
+
 #app.secret_key = 'secret string'
-app.config['SECRET_KEY'] = os.urandom(24)
+
 app.register_blueprint(aaa, url_prefix="/")
  
 
@@ -34,17 +34,21 @@ db = pymysql.connect("localhost","root","liao1977","liao" )
 # 使用cursor()方法获取操作游标 
 cursor = db.cursor()
 # SQL 查询语句
+app.config['SESSION_TYPE'] = 'filesystem'
 
+app.config['SECRET_KEY'] = os.urandom(24)
+
+Session(app)
 
 #session = requests.Session()
-session['username']= 'liaohuaqing'
+
 @app.route("/")
 def index():
 	aa1=""
 	aa=""
 	img=""
 	aa2=""
-	
+	session['username']= 'liaohuaqing'
 	sql1 = "SELECT * FROM config"
 	try:
         # 执行SQL语句
@@ -64,13 +68,14 @@ def index():
 		db.commit()
         # 获取所有记录列表
 		results = cursor.fetchall()
-   		
+		ss=session.get('user')
+		print(ss) 
 		aa2=results
 		for r in results:
 			aa=aa+r[1]+"<br>"
 			img=img+r[4]
 			print (img)
-			print(session.get['username'])
+			
 	except:
 		print ("Error: unable to fetch data")
 		aa="bbbbbb"
@@ -100,16 +105,17 @@ def upcontent(title,img,body):
 
 @app.route("/add/", methods=['POST', 'GET'])
 def add():
-    form = PostForm()
-    if form.validate_on_submit():
-        title = form.title.data
-        img= form.img.data
-        body = form.body.data
-        # You may need to store the data in database here
-        upcontent(title,img,body)
-        return render_template('post.html', title=title, img=img, body=body)
-        
-    return render_template('add.html', form=form)
+	form = PostForm()
+	ss=session.get('user')
+	print(ss)
+	if form.validate_on_submit():
+		title = form.title.data
+		img= form.img.data
+		body = form.body.data
+		# You may need to store the data in database here
+		upcontent(title,img,body)
+		return render_template('post.html', title=title, img=img, body=body)
+	return render_template('add.html', form=form)
 class PostForm(FlaskForm):
     title = StringField('Title')
     img = StringField('Image')
