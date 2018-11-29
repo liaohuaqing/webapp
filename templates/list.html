@@ -75,71 +75,25 @@ var popwin = window.parent.popwin;
 	<div id="smalltab_container" style="display:none;"></div>
 	<div class="smalltab_line" style="display:none;"></div>
 	<div class="div_clear" style="display:none;height:10px;"></div>
-	<div >你好，<font color="#fc0914">session("ft_admin")</font>，欢迎您使用 <font color="#fc0914">ft_webname</font> 网站后台管理！</div>
-	<div class="tips_1"><b>服务器信息</b></div>
+	<div >你好，<font color="#fc0914">admin</font>，欢迎您使用 <font color="#fc0914"></font> 网站后台管理！</div>
+	<div class="tips_1"><b>文章列表信息</b></div>
 		<table width="99%" border="0" align="center" cellpadding="3" cellspacing="1" class="table_1">
 <tr>
-  <td width="20%" align="right" class="td_6">服务器名：</td>
-  <td width="30%" class="td_6">Request.ServerVariables("SERVER_NAME")</td>
-  <td width="20%" align="right" class="td_6">服务器IP：</td>
-  <td width="30%" class="td_6">Request.ServerVariables("LOCAL_ADDR") 端口：Request.ServerVariables("SERVER_PORT")</td>
+<td align="left" class="td_6">
+<p align="center">序号</td>
+<td align="left" class="td_6">
+<p align="center">文章列表</td>
+<td colspan="3" class="td_6">
+<p align="center">操作</td>
 </tr>
+{%for i in data%}
 <tr>
-<td align="right" class="td_6">本文件绝对路径：</td>
-<td colspan="3" class="td_6"></td>
+<td align="center" class="td_6">{{i[0]}}</td>
+<td align="left" class="td_6"><p class="dd_text_1"><a href="view/{{i[0]}}"><font color=black>{{i[2][0:60]}}.....</font></a></p> </td>
+<td colspan="3" class="td_6">
+<p align="center">|&nbsp;&nbsp; <a href="editid/{{i[0]}}/{{i[0]}}">编辑</a>&nbsp;&nbsp; |&nbsp;&nbsp; <a href="delid/{{i[0]}}">删除</a>&nbsp; |</td>
 </tr>
-<tr>
-<td align="right" class="td_6">IIS版本：</td>
-<td class="td_6">Request.ServerVariables("SERVER_SOFTWARE")</td>
-<td align="right" class="td_6">服务器时间：</td>
-<td class="td_6">now</td>
-</tr>
-<tr>
-<td align="right" class="td_6">脚本解释引擎：</td>
-<td class="td_6">ScriptEngine & "/"& ScriptEngineMajorVersion &"."&ScriptEngineMinorVersion&"."& ScriptEngineBuildVersion </td>
-<td align="right" class="td_6">脚本超时时间：</td>
-<td class="td_6">Server.ScriptTimeout 秒</td>
-</tr>
-<tr>
-<td align="right" class="td_6">客户端IP：</td>
-<td class="td_6">Request.ServerVariables("REMOTE_ADDR")</td>
-<td align="right" class="td_6">MSXML2.XMLHTTP：</td>
-<td class="td_6">If IsObjInstalled("MSXML2.XMLHTTP") Then
-  <font color="#00CC00">支持√</font>
-  </td>
-</tr>
-<tr>
-<td align="right" class="td_6">FSO组件：</td>
-<td class="td_6">
-
-  </td>
-<td align="right" class="td_6">Jmail邮箱组件：</td>
-<td class="td_6">
- </td>
-</tr>
-<tr>
-<td align="right" class="td_6">adodb.stream组件：</td>
-<td class="td_6">
-
-
-
-<font color="#FF0000">不支持×</font>
-
-
-    <font color="#00CC00">支持√</font>
-
-
-
-  </td>
-<td align="right" class="td_6">Aspjpeg组件：</td>
-<td class="td_6">
-
-
-<font color="#00CC00">支持√</font>
-
-
-  </td>
-</tr>
+{%endfor%}
 </table>
 	<div id="t2"></div>
 	<div id="t3"></div>

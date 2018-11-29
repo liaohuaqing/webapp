@@ -68,8 +68,16 @@ def get_code():
 @aaa.route("/login")
 def login():
 	print(session.get('image'))
-	return render_template("login.html") 
-    
+	return render_template("login.html")
+
+@aaa.route("/logout")
+def logout():
+	return redirect("/")
+
+@aaa.route("/main")
+def main():
+	return render_template("main.html")
+
 @aaa.route("/checkin", methods=['POST'])
 def checkin():
 	admin1=request.form.get('admin1')
@@ -85,7 +93,27 @@ def checkin():
 		print("bad!")
 		return render_template("login.html")
 
+@aaa.route("/list")
+def list():
+	aa1=""
+	aa=""
+	img=""
+	aa2=""
 	
+	sql1 = "SELECT * FROM liaotb order by desc" 
+	try:
+        # 执行SQL语句
+   		cursor.execute(sql1)
+        # 获取所有记录列表
+   		results1 = cursor.fetchall()
+   		
+   		for r1 in results1:
+   			aa1=r1[1]
+   		print (aa1) 
+	except:
+  		print ("Error: unable to fetch data")
+	return render_template("list.html",data=results1,site=aa)
+
 @aaa.route("/view/<int:post_id>")
 
 def view(post_id):
@@ -137,4 +165,4 @@ def delid(post_id):
   except:
       print ("Error:删除失败")
       db.rollback()
-  return redirect("/")
+  return redirect("/list")

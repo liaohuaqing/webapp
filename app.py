@@ -61,7 +61,7 @@ def index():
    		#print (aa1) 
 	except:
   		print ("Error: unable to fetch data")
-	sql = "SELECT * FROM liaotb"
+	sql = "SELECT * FROM liaotb order by id desc"
 	try:
         # 执行SQL语句
 		cursor.execute(sql)
@@ -90,7 +90,11 @@ def gen_rnd_filename():
 def upcontent(title,img,body):
 	
 	#print(body)
-	sql_insert ="insert into liaotb(name,content,date1,img,author) values('%s','%s','%s','%s','%s')" % (title,body,title,img,title)
+	nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在时间
+	if img=="":
+		img="images/s.jpg"
+	author="admin"
+	sql_insert ="insert into liaotb(name,content,date1,img,author) values('%s','%s','%s','%s','%s')" % (title,body,nowTime,img,author)
  
 	try:
 		cursor.execute(sql_insert)
@@ -115,13 +119,14 @@ def add():
 		body = form.body.data
 		# You may need to store the data in database here
 		upcontent(title,img,body)
-		return render_template('post.html', title=title, img=img, body=body)
+		#return render_template('post.html', title=title, img=img, body=body)
+		return redirect("/list")
 	return render_template('add.html', form=form)
 class PostForm(FlaskForm):
     title = StringField('Title')
     img = StringField('Image')
     body = CKEditorField('Body', validators=[DataRequired()])
-    submit = SubmitField()
+    submit = SubmitField('提  交')
 
 
 

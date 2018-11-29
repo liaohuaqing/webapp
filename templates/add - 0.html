@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Flask-CKEditor Demo</title>
+</head>
+<body>
+	<div class="warpper" style="{margin:0 auto;width:80%">
+		<form method="post">
+			{{ form.csrf_token }}
+			{{ form.title.label }}<br>
+			标题：{{ form.title }}<br><br>
+			{{ form.img.label }}<br>
+			图片：{{ form.img }}<br><br>
+			{{ form.body.label }}<br>
+			{{ form.body }}
+			<br>
+			{{ form.submit }}
+		</form>
+	</div>
+    {{ ckeditor.load() }}
+	{{ ckeditor.config(name='body') }}
+</body>
+</html>
+
