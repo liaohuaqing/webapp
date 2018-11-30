@@ -42,8 +42,10 @@
 			<input type="submit" onclick="alert('提交成功！')"  value="提    交">
 		</form>
 	</div>
-    {{ ckeditor.load() }}
-	{{ ckeditor.config(name='body') }}
+
+
+<script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+
 </body>
 </html>
 

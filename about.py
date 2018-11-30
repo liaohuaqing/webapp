@@ -46,7 +46,7 @@ cursor = db.cursor()
 # SQL 查询语句
 @aaa.route("/about")
 def about():
-	print(session['username'])
+	
 	return render_template("about.html") 
 
 
@@ -100,19 +100,17 @@ def list():
 	img=""
 	aa2=""
 	
-	sql1 = "SELECT * FROM liaotb order by desc" 
+	sql1 = "SELECT * FROM liaotb order by id desc" 
 	try:
         # 执行SQL语句
    		cursor.execute(sql1)
+   		#db.commit()
         # 获取所有记录列表
    		results1 = cursor.fetchall()
-   		
-   		for r1 in results1:
-   			aa1=r1[1]
-   		print (aa1) 
+   		aa1=results1
 	except:
   		print ("Error: unable to fetch data")
-	return render_template("list.html",data=results1,site=aa)
+	return render_template("list.html",data=aa1,site=aa)
 
 @aaa.route("/view/<int:post_id>")
 
@@ -125,7 +123,7 @@ def view(post_id):
 	try:
         # 执行SQL语句
    		cursor.execute(sql1)
-   		db.commit()
+   		
         # 获取所有记录列表
    		results = cursor.fetchall()
 
@@ -137,15 +135,13 @@ def view(post_id):
 	try:
         # 执行SQL语句
    		cursor.execute(sql1)
+   		db.commit()
         # 获取所有记录列表
    		results1 = cursor.fetchall()
-   		
-   		for r1 in results1:
-   			aa1=r1[1]
-   		print (aa1) 
+   		aa1=results1
 	except:
   		print ("Error: unable to fetch data")
-	return render_template("view.html",vd=results1,site=aa)
+	return render_template("view.html",vd=aa1,site=aa)
 @aaa.route("/delid/<int:post_id>")
 def delid(post_id):
   aa1=""

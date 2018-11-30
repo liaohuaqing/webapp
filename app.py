@@ -111,6 +111,7 @@ def upcontent(title,img,body):
 @app.route("/add/", methods=['POST', 'GET'])
 def add():
 	form = PostForm()
+	form.img.data="images/s.jpg"
 	ss=session.get('user')
 	print(ss)
 	if form.validate_on_submit():
@@ -124,7 +125,7 @@ def add():
 	return render_template('add.html', form=form)
 class PostForm(FlaskForm):
     title = StringField('Title')
-    img = StringField('Image')
+    img = StringField('Image',validators=[DataRequired()])
     body = CKEditorField('Body', validators=[DataRequired()])
     submit = SubmitField('提  交')
 
