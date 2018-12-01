@@ -1,51 +1,26 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-
-<style type="text/css">
-        div{
-          margin: 10px 0;
-        }
-        /*无效输入时的样式*/
-        input:required:invalid{
-            background-image: url(error.png);
-          background-position: right center;
-          background-repeat: no-repeat;
-          border-color: red;
-          box-shadow: none;
-           /* 兼容FF13以前版本 */
-          -moz-box-shadow: none;
-        }
-         /*有效输入时的样式*/
-        input:required:valid{
-          background-image: url(true.png);
-          background-position: right center;
-          background-repeat: no-repeat;
-          border-color: green;
-          box-shadow: none;
-           /* 兼容FF13以前版本 */
-          -moz-box-shadow: none;
-        }
-
-	
-</style>
+    <title>Flask-CKEditor Demo</title>
 </head>
 <body>
-	<div class="warpper" style="{margin:0 auto;width:80%;height:auto">
+	<div class="warpper" style="{margin:0 auto;width:80%">
 		<form method="post">
 			{{ form.csrf_token }}
-			标题：{{ form.title }}<br>
-			图片：{{ form.img }}<br>
-			内容：{{ form.body }}<br>
-			
-			<input type="submit" onclick="alert('提交成功！')"  value="提    交">
+			{{ form.title.label }}<br>
+			标题：{{ form.title }}<br><br>
+			{{ form.img.label }}<br>
+			图片：{{ form.img }}<br><br>
+			{{ form.body.label }}<br>
+			{{ form.body }}
+			<br>
+			{{ form.submit }}
 		</form>
 	</div>
-
-
-<script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
-{{ ckeditor.config(name='body') }}
+    {{ ckeditor.load() }}
+	{{ ckeditor.config(name='body') }}
 </body>
 </html>
 

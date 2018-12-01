@@ -39,9 +39,11 @@
 			图片：{{ form.img }}<br>
 			内容：{{ form.body }}<br>
 			
-			<input type="submit" onclick="alert('提交成功！')"  value="提    交">
+			<input type="submit" onclick="alert('提交成功！')"  value="Submit">
 		</form>
 	</div>
+
+
 <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
 {{ ckeditor.config(name='body') }}
 </body>
