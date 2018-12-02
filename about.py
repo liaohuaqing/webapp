@@ -109,7 +109,7 @@ def list():
    		results1 = cursor.fetchall()
    		aa1=results1
 	except:
-  		print ("Error: unable to fetch data")
+  		print ("Error: list unable to fetch data")
 	return render_template("list.html",data=aa1,site=aa)
 
 @aaa.route("/view/<int:post_id>")

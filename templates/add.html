@@ -19,7 +19,7 @@
 			{{ form.submit }}
 		</form>
 	</div>
-    {{ ckeditor.load() }}
+  <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
 	{{ ckeditor.config(name='body') }}
 </body>
 </html>

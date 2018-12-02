@@ -123,6 +123,63 @@ def add():
 		#return render_template('post.html', title=title, img=img, body=body)
 		return redirect("/list")
 	return render_template('add.html', form=form)
+
+def editcontent(title,img,body,post_id):
+	
+	#print(body)
+	nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在时间
+	if img=="":
+		img="images/s.jpg"
+	author="admin"
+	sql_insert ="update liaotb set name='%s',content='%s',date1='%s',img='%s',author='%s' where id=%s" % (title,body,nowTime,img,author,str(post_id))
+	#print(sql_insert)	
+	try:
+		cursor.execute(sql_insert)
+		#提交
+		db.commit()
+	except Exception as e:
+		#错误回滚
+		print("edit bad!!")
+		db.rollback() 
+	finally:
+		print("edit ok!!")
+		#db.close()
+@app.route("/edit/<int:post_id>", methods=['POST', 'GET'])
+def edit(post_id):
+	aa2=""
+	sql = "SELECT * FROM liaotb where id=" + str(post_id)
+	try:
+        # 执行SQL语句
+		cursor.execute(sql)
+		db.commit()
+        # 获取所有记录列表
+		results = cursor.fetchall()
+
+		aa2=results
+		for r in results:
+			aa=aa+r[1]+"<br>"
+			img=img+r[4]
+			#print (img)
+			
+	except:
+		print ("Error: unable to fetch data")
+		aa="bbbbbb"
+	form = PostForm()
+
+	ss=session.get('user')
+	print(ss)
+	if form.validate_on_submit():
+		title = form.title.data
+		img= form.img.data
+		body = form.body.data
+		# You may need to store the data in database here
+		editcontent(title,img,body,post_id)
+		#return render_template('post.html', title=title, img=img, body=body)
+		return redirect("/list")
+	form.title.data=r[1]
+	form.img.data=r[4]
+	form.body.data=r[2]
+	return render_template('edit.html', form=form)	
 class PostForm(FlaskForm):
     title = StringField('Title')
     img = StringField('Image',validators=[DataRequired()])
