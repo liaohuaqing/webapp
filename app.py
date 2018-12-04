@@ -114,7 +114,7 @@ def upcontent(title,img,body):
 @app.route("/add/", methods=['POST', 'GET'])
 def add():
 	form = PostForm()
-	form.img.data="images/s.jpg"
+	
 	ss=session.get('user')
 	print(ss)
 	if form.validate_on_submit():
@@ -125,6 +125,7 @@ def add():
 		upcontent(title,img,body)
 		#return render_template('post.html', title=title, img=img, body=body)
 		return redirect("/list")
+	form.img.data="images/s.jpg"
 	return render_template('add.html', form=form)
 
 def editcontent(title,img,body,post_id):
