@@ -11,33 +11,7 @@
 <link rel="stylesheet" href={{url_for('static', filename='css/index.css')}}>
 
 <link rel="stylesheet" href={{url_for('static', filename='css/style.css')}}/>
-<style>
-ul.pagination {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-}
 
-ul.pagination li {display: inline;}
-
-ul.pagination li a {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    transition: background-color .3s;
-    border: 1px solid #ddd;
-    font-size: 14px;
-}
-
-ul.pagination li a.active {
-    background-color: #eee;
-    color: blue;
-    border: 1px solid #ddd;
-}
-
-ul.pagination li a:hover:not(.active) {background-color: #a5a5a5;}
-</style>
 
 </head>
 
@@ -97,14 +71,9 @@ ul.pagination li a:hover:not(.active) {background-color: #a5a5a5;}
             </div>
 {% endfor %}           
            <!--wz end-->
-         <div align="center">  
-         <ul class="pagination">
-               
-                    {{ html|safe }}
-        
            
-        </ul>  
-         </div> 
+         
+          
                              
            </div>
          </div>

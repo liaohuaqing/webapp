@@ -104,7 +104,7 @@ def list():
 	try:
         # 执行SQL语句
    		cursor.execute(sql1)
-   		#db.commit()
+   		db.commit()
         # 获取所有记录列表
    		results1 = cursor.fetchall()
    		aa1=results1
@@ -123,6 +123,7 @@ def view(post_id):
 	try:
         # 执行SQL语句
    		cursor.execute(sql1)
+   		db.commit()
    		
         # 获取所有记录列表
    		results = cursor.fetchall()

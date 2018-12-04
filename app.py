@@ -14,6 +14,8 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from flask_ckeditor import CKEditor, CKEditorField, upload_fail, upload_success
 from datetime import timedelta
+from pager import Pagination
+from urllib.parse import urlencode
 app = Flask(__name__)
 ckeditor = CKEditor(app)
 Session(app) 
@@ -48,7 +50,7 @@ def index():
 	aa=""
 	img=""
 	aa2=""
-	
+	li = []
 	sql1 = "SELECT * FROM config"
 	try:
         # 执行SQL语句
@@ -72,16 +74,17 @@ def index():
 		ss=session.get('username')
 		print(ss) 
 		aa2=results
-		for r in results:
-			aa=aa+r[1]+"<br>"
-			img=img+r[4]
-			print (img)
+		li=aa2
 			
 	except:
 		print ("Error: unable to fetch data")
-		aa="bbbbbb"
-	return render_template("index.html",site=aa1,name=aa2)
 
+	pager_obj = Pagination(request.args.get("page",1),len(li),request.path,request.args,per_page_count=5) #可设置每页显示数量
+	# print(request.args)
+	index_list = li[pager_obj.start:pager_obj.end]
+	html = pager_obj.page_html()
+	#return render_template("pager.html",index_list=index_list, html = html)
+	return render_template("index.html",site=aa1,name=index_list, html = html)
 def gen_rnd_filename():
     filename_prefix = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
     return '%s%s' % (filename_prefix, str(random.randrange(1000, 10000)))#app.register_blueprint(tree, url_prefix="/")
@@ -175,7 +178,7 @@ def edit(post_id):
 		# You may need to store the data in database here
 		editcontent(title,img,body,post_id)
 		#return render_template('post.html', title=title, img=img, body=body)
-		return redirect("/list")
+		return redirect(url_for('aaa.list'))
 	form.title.data=r[1]
 	form.img.data=r[4]
 	form.body.data=r[2]

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <title>Title</title>
+<style>
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+}
+
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+</style>
+</head>
+<body>
+<div>
+    <a href="/add?{{ condition }}"><button>添加/button></a>
+    
+           
+                {% for foo in index_list %}
+                    <br>{{ foo }}-------------------------------------6666666666---------------666666666666666-----------------------------------------<br>
+                {% endfor %}
+  </div>
+  <div>   
+     <ul class="pagination">
+               
+                    {{ html|safe }}
+        
+           
+     </ul>
+</div>
+</div>
+</body>
+</html>
