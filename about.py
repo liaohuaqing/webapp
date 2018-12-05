@@ -8,6 +8,11 @@ import datetime
 import os
 import random
 import requests
+from pager import Pagination
+from urllib.parse import urlencode
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 aaa= Blueprint("aaa", __name__)
 #session = requests.Session()
 def validate_picture():
@@ -93,13 +98,40 @@ def checkin():
 		print("bad!")
 		return render_template("login.html")
 
-@aaa.route("/list")
-def list():
+@aaa.route("/list/<int:post_id>")
+def list(post_id):
 	aa1=""
 	aa=""
 	img=""
 	aa2=""
-	
+	li=[]
+	if post_id=="":
+		post_id=1
+	sql1 = "SELECT * FROM liaotb where classid=%d order by id desc" %(post_id)
+	try:
+        # 执行SQL语句
+   		cursor.execute(sql1)
+   		db.commit()
+        # 获取所有记录列表
+   		results1 = cursor.fetchall()
+   		aa1=results1
+   		li=aa1
+	except:
+  		print ("Error: list unable to fetch data")
+	#return render_template("list.html",data=aa1,site=aa)
+	pager_obj = Pagination(request.args.get("page",1),len(li),request.path,request.args,per_page_count=5) #可设置每页显示数量
+	# print(request.args)
+	index_list = li[pager_obj.start:pager_obj.end]
+	html = pager_obj.page_html()
+	#return render_template("pager.html",index_list=index_list, html = html)
+	return render_template("list.html",site=aa,name=index_list, html = html)
+@aaa.route("/mlist")
+def mlist():
+	aa1=""
+	aa=""
+	img=""
+	aa2=""
+	li=[]
 	sql1 = "SELECT * FROM liaotb order by id desc" 
 	try:
         # 执行SQL语句
@@ -108,9 +140,16 @@ def list():
         # 获取所有记录列表
    		results1 = cursor.fetchall()
    		aa1=results1
+   		li=aa1
 	except:
   		print ("Error: list unable to fetch data")
-	return render_template("list.html",data=aa1,site=aa)
+	#return render_template("mlist.html",data=aa1,site=aa)
+	pager_obj = Pagination(request.args.get("page",1),len(li),request.path,request.args,per_page_count=5) #可设置每页显示数量
+	# print(request.args)
+	index_list = li[pager_obj.start:pager_obj.end]
+	html = pager_obj.page_html()
+	#return render_template("pager.html",index_list=index_list, html = html)
+	return render_template("mlist.html",site=aa,data=index_list, html = html)
 
 @aaa.route("/view/<int:post_id>")
 
@@ -163,3 +202,25 @@ def delid(post_id):
       print ("Error:删除失败")
       db.rollback()
   return redirect("/list")
+
+
+
+@aaa.route("/addclass", methods=['POST', 'GET'])
+def addclass():
+	form = classform()
+	class1=""#class1 = form['class1']
+	print(form.class1.data)
+	if form.validate_on_submit():
+		class1 = form.class1.data
+		# You may need to store the data in database here
+		#upcontent(title,img,body)
+		#return render_template('post.html', title=title, img=img, body=body)
+		#return redirect("/list")
+		print(class1)
+		return render_template('class.html', form=form, class1=class1)
+	return render_template('class.html',form=form)
+
+class classform(FlaskForm):
+    #class1 = StringField("class1",[Required()])
+    class1 = StringField('Class1',validators=[DataRequired()])
+    submit = SubmitField("Submit")

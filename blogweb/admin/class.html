@@ -1,0 +1,68 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title><%=lanmu_name%></title>
+
+<meta name="author" content="Web Design：victor QQ:691519757 E-mail:victor2008@foxmail.com Website:http://www.andasen.com/net" />
+<link href="pub/css.css" rel="stylesheet" type="text/css" />
+<script charset="utf-8" src="pub/custom-form-elements.js"></script>
+<script language="JavaScript" type="text/JavaScript">
+function showlist1(dd)
+{
+  if(dd=="a")
+  {
+   ftshow1.style.display="none";
+  }
+  else
+  {
+   ftshow1.style.display="";
+  }
+}
+function showlist2(dd)
+{
+  if(dd=="a")
+  {
+   ftshow2.style.display="none";
+  }
+  else
+  {
+   ftshow2.style.display="";
+  }
+}
+function showlist3(dd)
+{
+  if(dd=="a")
+  {
+   ftshow3.style.display="none";
+  }
+  else
+  {
+   ftshow3.style.display="";
+  }
+}
+</script>
+</head>
+
+<body onmouseover="self.status='您正在处于网站后台管理，不进行操作请退出！';return true">
+<br>
+<form name="myform" id="myform" action="/addclass" method="post">
+<table width="100%"  cellpadding="3"  cellspacing="1" border="0" align="left" class="a2" id="tagContent0">
+<tr>
+  <td align="right" class="a3">分类名称：      </td>
+  <td width="86%" align="left" class="a3"><input name="class" type="text" id="class" value="" size="50" maxlength="255" />
+    </td>
+</tr>
+
+
+<tr>
+  <td align="center">&nbsp;</td>
+  <td align="left"><input name="submit" type="submit" id="submit" value="保存" class="submit_button" style="border:none;" >
+</td>
+</tr>
+</table>
+</form>
+
+</body>
+</html>

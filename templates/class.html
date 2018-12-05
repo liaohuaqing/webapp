@@ -1,0 +1,36 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title><%=lanmu_name%></title>
+
+<meta name="author" content="" />
+
+<link href="{{url_for('static', filename='css/pub/global.css')}}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body onmouseover="self.status='您正在处于网站后台管理，不进行操作请退出！';return true">
+<br>
+<form  method="post">
+{{ form.csrf_token }}
+
+<table width="100%"  cellpadding="3"  cellspacing="1" border="0" align="left" class="a2" id="tagContent0">
+<tr>
+  <td align="right" class="a3">分类名称：  {{class1}}    </td>
+  <td width="86%" align="left" class="a3"><input name="class1" type="text" id="class1" value="{{class1}}" size="50" maxlength="255" />
+    </td>
+</tr>
+
+
+<tr>
+  <td align="center">&nbsp;</td>
+  <td align="left">{{ form.submit() }}
+</td>
+</tr>
+</table>
+</form>
+
+</body>
+</html>
