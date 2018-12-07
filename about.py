@@ -204,22 +204,101 @@ def delid(post_id):
   return redirect("/list")
 
 
+@aaa.route("/editclass/<int:post_id>", methods=['POST', 'GET'])   #编辑分类
+def editclass(post_id):
+	form = classform()
+	class1=""
+	aa1=""
+	img=""
+	class2=""
+	cursor = db.cursor()
+	sql1 = "SELECT * FROM classtb where id=%s" % (str(post_id))   #查询分类
+	try:
+		# 执行SQL语句
+		cursor.execute(sql1)
+		db.commit()
+		# 获取所有记录列表
+		results1 = cursor.fetchall()
+		aa1=results1
+	except:
+		print ("Error: 查询分类unable to fetch data")
+		
+	if form.validate_on_submit():
+		class1 = form.class1.data
+		sql_insert ="update classtb set class='%s' where id=%s" % (class1,str(post_id))
+		#print(sql_insert)	
+		try:
+			cursor.execute(sql_insert)
+			#提交
+			db.commit()
+		except Exception as e:
+			#错误回滚
+			print("edit bad!!")
+			db.rollback() 
+		return redirect("/addclass")
+		#return render_template('class.html', form=form, class1=class1)
+	return render_template('editclass.html',form=form,class1=class2,data=aa1)
 
+@aaa.route("/delclass/<int:post_id>")
+def delclass(post_id):
+  aa1=""
+  aa=""
+  img=""
+  aa2=""
+  cur = db.cursor()
+  #sql1 = "delete from liaotb where id=1"
+  sql1 = "delete from classtb where id=%d" %(post_id)
+  try:
+      print(sql1)
+        # 执行SQL语句
+      cur.execute(sql1)
+        # 获取所有记录列表
+      db.commit()
+      print ("删除class成功！") 
+  except:
+      print ("Error:删除class失败")
+      db.rollback()
+  return redirect("/addclass")
 @aaa.route("/addclass", methods=['POST', 'GET'])
 def addclass():
 	form = classform()
-	class1=""#class1 = form['class1']
-	print(form.class1.data)
+	aa1=""
+	class1=""
+	#print(form.class1.data)
+	sql1 = "SELECT * FROM classtb"   #查询分类
+	try:
+        # 执行SQL语句
+   		cursor.execute(sql1)
+   		db.commit()
+        # 获取所有记录列表
+   		results1 = cursor.fetchall()
+   		aa1=results1
+	except:
+  		print ("Error: unable to fetch data")
 	if form.validate_on_submit():
 		class1 = form.class1.data
-		# You may need to store the data in database here
-		#upcontent(title,img,body)
-		#return render_template('post.html', title=title, img=img, body=body)
-		#return redirect("/list")
-		print(class1)
-		return render_template('class.html', form=form, class1=class1)
-	return render_template('class.html',form=form)
-
+		saveclass(class1)
+		return redirect("/addclass")
+		#return render_template('class.html', form=form, class1=class1)
+	return render_template('class.html',form=form,data=aa1)
+def saveclass(classname):
+	class1=""
+	#print(form.class1.data)
+	#查询分类
+	sql_insert ="insert into classtb(class) values('%s')" % (classname)
+ 
+	try:
+		cursor.execute(sql_insert)
+		#提交
+		db.commit()
+	except Exception as e:
+		#错误回滚
+		print("add class bad!!")
+		db.rollback() 
+	#finally:
+		#print("add class ok!!")
+		#db.close()
+	#return redirect("/addclass")	
 class classform(FlaskForm):
     #class1 = StringField("class1",[Required()])
     class1 = StringField('Class1',validators=[DataRequired()])

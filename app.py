@@ -10,7 +10,7 @@ import random
 import urllib
 import datetime
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 from flask_ckeditor import CKEditor, CKEditorField, upload_fail, upload_success
 from datetime import timedelta
@@ -128,14 +128,14 @@ def add():
 	form.img.data="images/s.jpg"
 	return render_template('add.html', form=form)
 
-def editcontent(title,img,body,post_id):
+def editcontent(title,class1,img,body,post_id):
 	
 	#print(body)
 	nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在时间
 	if img=="":
 		img="images/s.jpg"
 	author="admin"
-	sql_insert ="update liaotb set name='%s',content='%s',date1='%s',img='%s',author='%s' where id=%s" % (title,body,nowTime,img,author,str(post_id))
+	sql_insert ="update liaotb set name='%s',content='%s',date1='%s',img='%s',author='%s',classid=%d where id=%s" % (title,body,nowTime,img,author,int(class1),str(post_id))
 	#print(sql_insert)	
 	try:
 		cursor.execute(sql_insert)
@@ -174,20 +174,31 @@ def edit(post_id):
 	print(ss)
 	if form.validate_on_submit():
 		title = form.title.data
+		class1= form.class1.data
 		img= form.img.data
 		body = form.body.data
 		# You may need to store the data in database here
-		editcontent(title,img,body,post_id)
+		editcontent(title,class1,img,body,post_id)
 		#return render_template('post.html', title=title, img=img, body=body)
-		return redirect(url_for('aaa.list'))
+		return redirect("/mlist")
 	form.title.data=r[1]
+	form.class1.data=r[6]
 	form.img.data=r[4]
 	form.body.data=r[2]
 	return render_template('edit.html', form=form)	
 class PostForm(FlaskForm):
     title = StringField('Title')
+    class1 = StringField('Class1',validators=[DataRequired()])
     img = StringField('Image',validators=[DataRequired()])
     body = CKEditorField('Body', validators=[DataRequired()])
+    tag = SelectField(
+        label='类别',
+        validators=[DataRequired('请选择标签')],
+
+		choices=[(1, '情感'), (2, '星座'), (3, '爱情')],
+		default= 3,
+		coerce=int
+		)
     submit = SubmitField('提  交')
 
 
