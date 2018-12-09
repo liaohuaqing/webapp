@@ -151,27 +151,42 @@ def editcontent(title,class1,img,body,post_id):
 @app.route("/edit/<int:post_id>", methods=['POST', 'GET'])
 def edit(post_id):
 	aa2=""
+	aa=""
+	bb=""
+	cc=""
+	r2=""
+	li1=[]
 	sql = "SELECT * FROM liaotb where id=" + str(post_id)
 	try:
         # 执行SQL语句
 		cursor.execute(sql)
-		db.commit()
+		#db.commit()
         # 获取所有记录列表
 		results = cursor.fetchall()
 
 		aa2=results
 		for r in results:
-			aa=aa+r[1]+"<br>"
-			img=img+r[4]
-			#print (img)
-			
+			aa=r[6]
 	except:
 		print ("Error: unable to fetch data")
-		aa="bbbbbb"
-	form = PostForm()
 
-	ss=session.get('user')
-	print(ss)
+	sql2 = "SELECT * FROM classtb"
+	try:
+        # 执行SQL语句
+		cursor.execute(sql2)
+		db.commit()
+        # 获取所有记录列表
+		results2 = cursor.fetchall()
+		li1=results2
+		print("results2:")
+		print(results2)
+	except:
+		print ("Error2: unable to fetch data")
+
+	form = PostForm()	
+	
+	print("classid:",aa)
+
 	if form.validate_on_submit():
 		title = form.title.data
 		class1= form.class1.data
@@ -183,6 +198,11 @@ def edit(post_id):
 		return redirect("/mlist")
 	form.title.data=r[1]
 	form.class1.data=r[6]
+	
+	
+	form.tag.choices=li1
+	form.tag.data=aa
+	form.tag.coerce=int
 	form.img.data=r[4]
 	form.body.data=r[2]
 	return render_template('edit.html', form=form)	
@@ -191,14 +211,7 @@ class PostForm(FlaskForm):
     class1 = StringField('Class1',validators=[DataRequired()])
     img = StringField('Image',validators=[DataRequired()])
     body = CKEditorField('Body', validators=[DataRequired()])
-    tag = SelectField(
-        label='类别',
-        validators=[DataRequired('请选择标签')],
-
-		choices=[(1, '情感'), (2, '星座'), (3, '爱情')],
-		default= 3,
-		coerce=int
-		)
+    tag = SelectField('lei',validators=[DataRequired()])
     submit = SubmitField('提  交')
 
 
