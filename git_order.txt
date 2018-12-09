@@ -4,6 +4,11 @@ $ git config --global user.name  "Your Name"        配置Git仓库
 $ git config --global user.email "email@example.com"
 注意git config命令的--global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
 
+强制覆盖本地:
+git fetch --all  
+git reset --hard origin/master 
+git pull
+
 $ pwd     查看当前路径
 
 到代码文件夹下git bash

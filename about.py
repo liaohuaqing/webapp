@@ -107,6 +107,18 @@ def list(post_id):
 	li=[]
 	if post_id=="":
 		post_id=1
+	sql1 = "SELECT * FROM config"
+	try:
+        # 执行SQL语句
+   		cursor.execute(sql1)
+        # 获取所有记录列表
+   		results1 = cursor.fetchall()
+   		
+   		for r1 in results1:
+   			aa=r1[1]
+   		#print (aa) 
+	except:
+  		print ("Error: unable to fetch data")	
 	sql1 = "SELECT * FROM liaotb where classid=%d order by id desc" %(post_id)
 	try:
         # 执行SQL语句

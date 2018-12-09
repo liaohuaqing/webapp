@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -9,11 +9,11 @@
 	<div class="warpper" style="{margin:0 auto;width:80%">
 		<form method="post">
 			{{ form.csrf_token }}
-			{{ form.title.label }}<br>
-			标题：{{ form.title }}<br><br>
-			{{ form.img.label }}<br>
-			图片：{{ form.img }}<br><br>
-			{{ form.body.label }}<br>
+			
+			标题：{{ form.title }}<br>
+                        分类：{{ form.class1 }}<br>
+			图片：{{ form.img }}<br>
+		
 			{{ form.body }}
 			<br>
 			{{ form.submit }}

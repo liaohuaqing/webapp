@@ -90,14 +90,14 @@ def gen_rnd_filename():
     return '%s%s' % (filename_prefix, str(random.randrange(1000, 10000)))#app.register_blueprint(tree, url_prefix="/")
 #app.register_blueprint(tree_mold, url_prefix="/ash")
 
-def upcontent(title,img,body):
+def upcontent(title,class1,img,body):
 	
 	#print(body)
 	nowTime=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在时间
 	if img=="":
 		img="images/s.jpg"
 	author="admin"
-	sql_insert ="insert into liaotb(name,content,date1,img,author) values('%s','%s','%s','%s','%s')" % (title,body,nowTime,img,author)
+	sql_insert ="insert into liaotb(name,content,date1,img,author,classid) values('%s','%s','%s','%s','%s',%d)" % (title,body,nowTime,img,author,class1)
  
 	try:
 		cursor.execute(sql_insert)
@@ -113,18 +113,31 @@ def upcontent(title,img,body):
 
 @app.route("/add/", methods=['POST', 'GET'])
 def add():
+	li1=[]
+	sql2 = "SELECT * FROM classtb"
+	try:
+        # 执行SQL语句
+		cursor.execute(sql2)
+		db.commit()
+        # 获取所有记录列表
+		results2 = cursor.fetchall()
+		li1=results2
+		print("results2:")
+		print(results2)
+	except:
+		print ("Error2: unable to fetch data")
 	form = PostForm()
 	
-	ss=session.get('user')
-	print(ss)
+	form.class1.choices=li1
 	if form.validate_on_submit():
 		title = form.title.data
+		class1= form.class1.data
 		img= form.img.data
 		body = form.body.data
 		# You may need to store the data in database here
-		upcontent(title,img,body)
+		upcontent(title,class1,img,body)
 		#return render_template('post.html', title=title, img=img, body=body)
-		return redirect("/list")
+		return redirect("/mlist")
 	form.img.data="images/s.jpg"
 	return render_template('add.html', form=form)
 
@@ -183,10 +196,10 @@ def edit(post_id):
 	except:
 		print ("Error2: unable to fetch data")
 
-	form = PostForm()	
+	form = PostForm()
 	
 	print("classid:",aa)
-
+	form.class1.choices=li1
 	if form.validate_on_submit():
 		title = form.title.data
 		class1= form.class1.data
@@ -197,21 +210,20 @@ def edit(post_id):
 		#return render_template('post.html', title=title, img=img, body=body)
 		return redirect("/mlist")
 	form.title.data=r[1]
-	form.class1.data=r[6]
 	
 	
-	form.tag.choices=li1
-	form.tag.data=aa
-	form.tag.coerce=int
+	
+	form.class1.data=aa
+	#form.class1.coerce=int
 	form.img.data=r[4]
 	form.body.data=r[2]
 	return render_template('edit.html', form=form)	
 class PostForm(FlaskForm):
     title = StringField('Title')
-    class1 = StringField('Class1',validators=[DataRequired()])
+    #class1 = StringField('Class1',validators=[DataRequired()])
     img = StringField('Image',validators=[DataRequired()])
     body = CKEditorField('Body', validators=[DataRequired()])
-    tag = SelectField('lei',validators=[DataRequired()])
+    class1 = SelectField('类别',coerce=int)
     submit = SubmitField('提  交')
 
 
